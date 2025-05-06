@@ -14,12 +14,14 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component : ShowCourseMaterials
+                Component : ShowCourseMaterials,
+                
             },
 
             {
                 path: 'course-materials',
                 Component : ShowCourseMaterials,
+                
             },
             {
                 path: 'add-notes',

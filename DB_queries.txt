@@ -1,0 +1,74 @@
+create database bracu_student_welfare;
+
+CREATE TABLE students (
+    student_id VARCHAR(10) PRIMARY KEY,
+    student_name VARCHAR(30),
+    gsuit VARCHAR(40),
+    dept VARCHAR(5)
+);
+
+CREATE TABLE cart (
+    student_id VARCHAR(10),
+    PRIMARY KEY (student_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+CREATE TABLE object_list (
+    paid BOOLEAN,
+    student_id VARCHAR(10),
+    object_list_item VARCHAR(10),
+    PRIMARY KEY (student_id, object_list_item),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+CREATE TABLE study_materials (
+    student_id VARCHAR(10),
+    course_code VARCHAR(6),
+    faculty_initial VARCHAR(4),
+    note_link VARCHAR(255),
+    date_created DATE,
+    last_updated DATE,
+    FOREIGN KEY (student_id) REFERENCES students(student_id);
+);
+
+CREATE TABLE used_objects (
+    product_id VARCHAR(10) PRIMARY KEY,
+    product_name VARCHAR(20),
+    price FLOAT,
+    student_id VARCHAR(10),
+    date_bought DATE,
+    date_sold DATE,
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+INSERT INTO study_materials (student_id, course_code, faculty_initial, note_link, date_created, last_updated) VALUES
+('20240036', 'PHR201', 'RMK', 'https://notes.edu/phr201/nt0001', '2024-02-02', NULL),
+('20240016', 'ARC201', 'JRS', 'https://notes.edu/arc201/nt0002', '2024-01-28', NULL),
+('20240009', 'ENH201', 'TSR', 'https://notes.edu/enh201/nt0003', '2024-02-09', '2024-02-20'),
+('20240022', 'ECE101', 'SKR', 'https://notes.edu/ece101/nt0004', '2024-01-30', '2024-02-14'),
+('20240010', 'CSE201', 'RKM', 'https://notes.edu/cse201/nt0005', '2024-02-10', NULL),
+('20240001', 'PHR301', 'MNA', 'https://notes.edu/phr301/nt0006', '2024-01-23', NULL),
+('20240027', 'ARC301', 'TSR', 'https://notes.edu/arc301/nt0007', '2024-02-18', '2024-03-03'),
+('20240013', 'ENH301', 'AVS', 'https://notes.edu/enh301/nt0008', '2024-02-12', NULL),
+('20240035', 'EEE201', 'JPK', 'https://notes.edu/eee201/nt0009', '2024-02-01', '2024-02-13'),
+('20240034', 'ECE201', 'JPK', 'https://notes.edu/ece201/nt0010', '2024-02-03', NULL),
+('20240015', 'CSE101', 'NIV', 'https://notes.edu/cse101/nt0011', '2024-02-06', NULL),
+('20240018', 'PHR101', 'AVS', 'https://notes.edu/phr101/nt0012', '2024-02-07', NULL),
+('20240006', 'ARC101', 'PKV', 'https://notes.edu/arc101/nt0013', '2024-01-25', '2024-02-01'),
+('20240023', 'ENH101', 'TSR', 'https://notes.edu/enh101/nt0014', '2024-02-11', '2024-02-24'),
+('20240032', 'CSE301', 'RKM', 'https://notes.edu/cse301/nt0015', '2024-02-14', NULL);
+
+INSERT INTO used_objects (student_id, product_id, product_name, price, date_bought, date_sold) VALUES
+('20240004', 'PRD001', 'Python Crash Course (Used)', 2350, '2024-01-15', NULL),
+('20240001', 'PRD002', 'Pharmacology Lab Kit', 3005, '2024-01-18', '2024-02-10'),
+('20240006', 'PRD003', 'Architectural Scale Ruler', 875, '2024-01-20', NULL),
+('20240003', 'PRD004', 'Digital Multimeter (Basic)', 2100, '2024-01-22', NULL),
+('20240005', 'PRD005', 'Norton Anthology of Literature', 3300, '2024-01-25', NULL),
+('20240008', 'PRD006', 'Arduino Starter Kit', 2525, '2024-01-27', '2024-03-01'),
+('20240013', 'PRD007', 'English Grammar Workbook', 425, '2024-01-30', NULL),
+('20240015', 'PRD008', 'C++ Programming Textbook', 2100, '2024-02-01', NULL),
+('20240002', 'PRD009', 'Architect Drafting Set', 2750, '2024-02-03', NULL),
+('20240036', 'PRD010', 'Human Anatomy Poster Set', 1650, '2024-02-04', '2024-02-20'),
+('20240011', 'PRD011', 'Basic Circuit Components Kit', 2200, '2024-02-05', NULL),
+('20240022', 'PRD012', 'Digital Logic Lab Kit', 2525, '2024-02-06', NULL),
+('20240023', 'PRD013', 'Complete Works of Shakespeare', 950, '2024-02-07', NULL);
