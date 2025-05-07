@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
+import UpdateProfileInfo from '../UpdateProfileInfo/UpdateProfileInfo';
+import { AuthContext } from '../AuthProvider/AuthContext';
+import LoadingIcon from '../LoadingIcon/LoadingIcon';
+import ProfileDetails from '../ProfileDetails/ProfileDetails';
+import StudentContribution from '../StudentContribution/StudentContribution';
 
 const ProfilePage = () => {
+    // getting student_ID
+    const { user } = useContext(AuthContext);
+    const [userDetails, setUserDetails] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+
+        fetch(`http://localhost:8081/student-info?student_id=${user}`)
+            .then(res => res.json())
+            .then(data => {
+                setUserDetails(data);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching student info:', error);
+            });
+
+    }, [user]);
+
+
     return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-                    className="max-w-sm rounded-lg shadow-2xl"
-                />
-                <div>
-                    <h1 className="text-5xl font-bold">Box Office News!</h1>
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
-                    <button className="btn btn-primary">Get Started</button>
+        <section className="min-h-screen bg-[#5168A5] py-10">
+            <div className='w-11/12 md:w-10/12 mx-auto md:flex md:gap-20 lg:gap-50'>
+                <div className='flex-1'>
+                    <ProfileDetails isLoading={isLoading} userDetails={userDetails}></ProfileDetails>
+                </div>
+
+                <div className='flex-1'>
+                    <UpdateProfileInfo></UpdateProfileInfo>
                 </div>
             </div>
-        </div>
+
+            <div className='w-11/12 md:w-10/12 mx-auto mt-20'>
+                <StudentContribution></StudentContribution>
+            </div>
+        </section>
     );
 };
 

@@ -8,8 +8,6 @@ import AddNotesPage from "../Components/AddNotesPage/AddNotesPage";
 import ProfilePage from "../Components/ProfilePage/ProfilePage";
 import LoginPage from "../Components/LoginPage/LoginPage";
 import RegisterPage from "../Components/RegisterPage.jsx/RegisterPage";
-import CourseCard from "../Components/CourseCard";
-import CourseGrid from "../Components/CourseGrid";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 
 
@@ -53,12 +51,6 @@ export const router = createBrowserRouter([
                 element:
                     <RegisterPage></RegisterPage>
 
-            },
-            {
-                path: 'marketplace',
-                element: <PrivateRoute>
-                    <CourseGrid></CourseGrid>
-                </PrivateRoute>,
             },
 
             {

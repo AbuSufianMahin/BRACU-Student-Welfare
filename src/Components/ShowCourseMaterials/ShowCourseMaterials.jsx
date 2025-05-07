@@ -12,9 +12,10 @@ const ShowCourseMaterials = () => {
             .then(res => res.json())
             .then(data => {
                 setCourseMaterials(data);
-                setIsLoading(false)
+                setIsLoading(false);
             })
     }, [])
+    // console.log(Array.isArray(courseMaterials))
 
     return (
         <section className='min-h-screen bg-radial from-[#5168A5] from-40% to-[#90A9F0]'>
@@ -64,6 +65,7 @@ const ShowCourseMaterials = () => {
                                             <th className='border-b'>Faculty Name</th>
                                             <th className='border-b'>Notes Link</th>
                                             <th className='border-b'>Date Created</th>
+                                            <th className='border-b'>Added by</th>
                                         </tr>
                                     </thead>
 

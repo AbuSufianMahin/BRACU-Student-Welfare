@@ -42,7 +42,7 @@ const LoginPage = () => {
                 navigate(location.state? location.state : '/');
 
                 console.log(data.student.student_id)
-                // or setUser(data.student); whole OBJ
+                // or setUser(data.student); whole obj
 
             } else {
                 setError(data.error);

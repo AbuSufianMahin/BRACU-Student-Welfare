@@ -3,23 +3,9 @@ create database bracu_student_welfare;
 CREATE TABLE students (
     student_id VARCHAR(10) PRIMARY KEY,
     student_name VARCHAR(30),
-    gsuit VARCHAR(40),
+    gsuite VARCHAR(40),
     dept VARCHAR(5),
     password VARCHAR(50)
-);
-
-CREATE TABLE cart (
-    student_id VARCHAR(10),
-    PRIMARY KEY (student_id),
-    FOREIGN KEY (student_id) REFERENCES students(student_id)
-);
-
-CREATE TABLE object_list (
-    paid BOOLEAN,
-    student_id VARCHAR(10),
-    object_list_item VARCHAR(10),
-    PRIMARY KEY (student_id, object_list_item),
-    FOREIGN KEY (student_id) REFERENCES students(student_id)
 );
 
 CREATE TABLE study_materials (
@@ -32,15 +18,12 @@ CREATE TABLE study_materials (
     FOREIGN KEY (student_id) REFERENCES students(student_id);
 );
 
-CREATE TABLE used_objects (
-    product_id VARCHAR(10) PRIMARY KEY,
-    product_name VARCHAR(20),
-    price FLOAT,
-    student_id VARCHAR(10),
-    date_bought DATE,
-    date_sold DATE,
-    FOREIGN KEY (student_id) REFERENCES students(student_id)
-);
+//have to make last_updated == null!
+
+ALTER TABLE study_materials
+  ADD PRIMARY KEY (student_id,course_code,faculty_initial),
+  ADD KEY student_id (student_id);
+
 
 INSERT INTO study_materials (student_id, course_code, faculty_initial, note_link, date_created, last_updated) VALUES
 ('20240036', 'PHR201', 'RMK', 'https://notes.edu/phr201/nt0001', '2024-02-02', NULL),
@@ -58,6 +41,68 @@ INSERT INTO study_materials (student_id, course_code, faculty_initial, note_link
 ('20240006', 'ARC101', 'PKV', 'https://notes.edu/arc101/nt0013', '2024-01-25', '2024-02-01'),
 ('20240023', 'ENH101', 'TSR', 'https://notes.edu/enh101/nt0014', '2024-02-11', '2024-02-24'),
 ('20240032', 'CSE301', 'RKM', 'https://notes.edu/cse301/nt0015', '2024-02-14', NULL);
+
+INSERT INTO students (student_id, student_name, gsuite, dept, password) VALUES
+('20240036', 'John Doe', 'johndoe@gsuite.com', 'CSE', 'password123'),
+('20240016', 'Jane Smith', 'janesmith@gsuite.com', 'CSE', 'password456'),
+('20240009', 'Alice Johnson', 'alicej@gsuite.com', 'EEE', 'password789'),
+('20240022', 'Bob Brown', 'bobbrown@gsuite.com', 'ME', 'password101'),
+('20240010', 'Charlie Davis', 'charliedavis@gsuite.com', 'CSE', 'password202'),
+('20240001', 'David Wilson', 'davidw@gsuite.com', 'CSE', 'password303'),
+('20240027', 'Eva Taylor', 'evataylor@gsuite.com', 'EEE', 'password404'),
+('20240013', 'Frank Harris', 'frankh@gsuite.com', 'ME', 'password505'),
+('20240035', 'Grace Martin', 'gracemartin@gsuite.com', 'CSE', 'password606'),
+('20240034', 'Helen Lee', 'helenlee@gsuite.com', 'CSE', 'password707'),
+('20240015', 'Ivy White', 'ivywhite@gsuite.com', 'EEE', 'password808'),
+('20240018', 'Jack Black', 'jackblack@gsuite.com', 'ME', 'password909'),
+('20240006', 'Liam Green', 'liamgreen@gsuite.com', 'CSE', 'password111'),
+('20240023', 'Mia Adams', 'miaadams@gsuite.com', 'EEE', 'password222'),
+('20240032', 'Nina Scott', 'ninascott@gsuite.com', 'ME', 'password333');
+
+
+
+
+
+
+
+backend Stuff 
+
+cd Backend
+npm start
+
+
+
+
+
+//unnecessary
+
+CREATE TABLE cart (
+    student_id VARCHAR(10),
+    PRIMARY KEY (student_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+CREATE TABLE object_list (
+    paid BOOLEAN,
+    student_id VARCHAR(10),
+    object_list_item VARCHAR(10),
+    PRIMARY KEY (student_id, object_list_item),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+
+
+CREATE TABLE used_objects (
+    product_id VARCHAR(10) PRIMARY KEY,
+    product_name VARCHAR(20),
+    price FLOAT,
+    student_id VARCHAR(10),
+    date_bought DATE,
+    date_sold DATE,
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+
 
 INSERT INTO used_objects (student_id, product_id, product_name, price, date_bought, date_sold) VALUES
 ('20240004', 'PRD001', 'Python Crash Course (Used)', 2350, '2024-01-15', NULL),
