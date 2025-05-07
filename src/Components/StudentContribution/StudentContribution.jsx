@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthProvider/AuthContext';
 import SingleContribution from '../SingleContribution/SingleContribution';
-import { data } from 'react-router';
 
 const StudentContribution = () => {
     const { user } = useContext(AuthContext)
