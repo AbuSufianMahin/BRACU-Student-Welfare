@@ -42,11 +42,7 @@ const ShowCourseMaterials = () => {
                             <input type="search" placeholder="Enter Course Code" className='text-lg md:text-xl ' />
                         </label>
                     </form>
-
                 </div>
-
-
-
 
 
 

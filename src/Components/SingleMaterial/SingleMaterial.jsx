@@ -6,7 +6,10 @@ const SingleMaterial = ({ material, index }) => {
     const {course_code, faculty_initial, note_link, date_created} = material;
 
     const date = new Date(date_created);
-    const formatted = date.toLocaleString()
+    // console.log(date_created)
+    const formatted = date.toLocaleString();
+
+    
     return (
         <tr className='text-center text-lg border'>
             <td className='border-b'>{index + 1}</td>

@@ -4,7 +4,8 @@ CREATE TABLE students (
     student_id VARCHAR(10) PRIMARY KEY,
     student_name VARCHAR(30),
     gsuit VARCHAR(40),
-    dept VARCHAR(5)
+    dept VARCHAR(5),
+    password VARCHAR(50)
 );
 
 CREATE TABLE cart (
